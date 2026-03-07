@@ -1,7 +1,6 @@
 const express=require('express');
 const app=express();
 
-
 const cors= require('cors');
 app.use(cors());
 
@@ -11,7 +10,7 @@ app.use(morgan('dev'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const apiRouter=require('./api/routes/api.js');
-app.use('/api',apiRouter);
+const userRouter=require('./routes/userRouter');
+app.use('/user',userRouter);
 
 module.exports={app};
