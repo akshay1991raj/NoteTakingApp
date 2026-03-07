@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const userRouter=require('./routes/userRouter');
-app.use('/user',userRouter);
+const apiRouter=require('./routes/apiRouter');
+app.use('/api',apiRouter);
 
 module.exports={app};
