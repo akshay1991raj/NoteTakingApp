@@ -17,6 +17,7 @@ async function createUser(name,email,password){
     const query=`insert into users(name,email,password) values($1,$2,$3) returning *`;
     const values=[name,email,password];
     const result=await connectionPool.query(query,values);
+    // console.log(result)
     return result;
 }
 

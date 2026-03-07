@@ -9,6 +9,7 @@ app.use(morgan('dev'));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const apiRouter=require('./routes/apiRouter');
 app.use('/api',apiRouter);

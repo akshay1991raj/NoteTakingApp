@@ -1,7 +1,8 @@
 const userModel=require('../models/userModel');
 
 const createUser= async (userData) =>{
-    const user=await userModel.createUser(userData.name,userData.email,userData.password);
+    const {name,email,password}=userData;
+    const user=await userModel.createUser(name,email,password);
     return user;
 }
 
