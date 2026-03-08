@@ -14,4 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const apiRouter=require('./routes/apiRouter');
 app.use('/api',apiRouter);
 
+const errorhandler=require('errorhandler');
+app.use(errorhandler());
+
 module.exports={app};

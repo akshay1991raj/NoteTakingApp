@@ -1,11 +1,13 @@
 const express=require('express');
 const userRouter=express.Router();
-const userController=require('../controllers/userController');
+const {createUser,getAllUsers}=require('../controllers/userController');
+const {validateUser}=require('../validators/userValidators');
+const {validate}=require('../middleware/validate');
 
-userRouter.get('/',userController.getAllUsers);
+userRouter.get('/',getAllUsers);
 
 // userRouter.get('/:userId',userController.getUserById);
 
-userRouter.post('/',userController.createUser);
+userRouter.post('/',validateUser, validate, createUser);
 
 module.exports=userRouter;
