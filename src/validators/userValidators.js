@@ -7,4 +7,4 @@ const validateUser=[
         body("password").trim().notEmpty().isLength({min:8}).withMessage("Password validation failed")
     ];
 
-module.exports={validateUser}
+module.exports={validateUser};
