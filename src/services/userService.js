@@ -1,9 +1,8 @@
 const userModel=require('../models/userModel');
 
-const createUser= async (userData) =>{
-    const {name,email,password}=userData;
-    const user=await userModel.createUser(name,email,password);
+const getUserById= async (id) =>{
+    const user=await userModel.getUserById(id);
     return user;
 }
 
-module.exports={createUser};
+module.exports={getUserById};

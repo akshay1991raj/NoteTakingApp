@@ -1,22 +1,19 @@
-const userService=require('../services/userService.js');
+const userService=require('../services/userService');
 
-const createUser = async(req,res,next)=>{
+const getUser=async (req,res,next)=>{
+    const userId=Number(req.session.passport.user);
     try{
-        const userData=req.body;
-        const user= await userService.createUser(userData);
-        if (!user){
-            const error=new Error("User not created. Something went wrong.");
-            error.status=500;
-            throw error;
-        }
-        res.status(200).json({message: "New user created"});
+        const user=await userService.getUserById(userId);
+        console.log(user);
+        return res.status(200).json({user:user});
     }catch(error){
         next(error);
     }
+
 }
 
 const getAllUsers = async (req,res,next)=>{
-    //
+    //To-do
 }
 
-module.exports={createUser,getAllUsers};
+module.exports={getUser,getAllUsers};

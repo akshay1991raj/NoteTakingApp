@@ -6,19 +6,14 @@ const getAllUsers= async ()=>{
     return result;
 }
 
-async function getUserById(userId){
-    const query=`select * from users where userId=$1`;
-    const values=[userId];
-    const result= await connectionPool.query(query,values);
-    return result;
+const getUserById = async (userId)=>{
+    const query=`select id,email,first_name,last_name from users where id=$1`;
+    const values=userId;
+    const result= await connectionPool.query(query,[values]);
+    const user=result.rows[0];
+    return user;
 }
 
-async function createUser(name,email,password){
-    const query=`insert into users(name,email,password) values($1,$2,$3) returning *`;
-    const values=[name,email,password];
-    const result=await connectionPool.query(query,values);
-    // console.log(result)
-    return result;
-}
 
-module.exports={getAllUsers,getUserById,createUser};
+
+module.exports={getAllUsers,getUserById};
