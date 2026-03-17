@@ -7,6 +7,6 @@ const notebookRouter=require('./notebookRouter');
 
 apiRouter.use('/user',userRouter);
 // apiRouter.use('/note',noteRouter);
-// apiRouter.use('/notebook', notebookRouter);
+apiRouter.use('/notebook', notebookRouter);
 
 module.exports=apiRouter;
