@@ -3,7 +3,8 @@ const connectionPool=require('../config/db.js');
 const getAllUsers= async ()=>{
     const query=`select * from users`;
     const result= await connectionPool.query(query);
-    return result;
+    const users=result.rows;
+    return users;
 }
 
 const getUserById = async (userId)=>{

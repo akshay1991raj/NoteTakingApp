@@ -13,8 +13,8 @@ const getPasswordByEmail= async (email)=>{
 }
 
 const createUser= async (first_name,last_name,email,password)=>{
-    const insertQuery=`insert into users(first_name,last_name,email,password) values($1,$2,$3,$4) returning id`;
-    const values_insert=[first_name,last_name,email,password];
+    const insertQuery=`insert into users(first_name,last_name,email,password,user_type) values($1,$2,$3,$4,$5) returning id`;
+    const values_insert=[first_name,last_name,email,password,'regular'];
     const result_insert=await connectionPool.query(insertQuery,values_insert);
     const last_inserted_id=result_insert.rows[0].id;
     const selectQuery=`select * from users where id=$1`;

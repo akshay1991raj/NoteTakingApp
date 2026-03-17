@@ -10,7 +10,7 @@ userRouter.get('/users',ensureAuthenticated,userController.getAllUsers);
 
 userRouter.get('/',ensureAuthenticated,userController.getUser);
 
-// userRouter.get('/:userId',userController.getUserById);
+userRouter.get('/:userId',ensureAuthenticated,userController.getUserById);
 
 // userRouter.post('/signup',validateMultipleInputsInBody('first_name','last_name'), validateUser, validate, userController.createUser);
 
