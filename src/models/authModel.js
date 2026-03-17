@@ -20,7 +20,6 @@ const createUser= async (first_name,last_name,email,password)=>{
     const selectQuery=`select * from users where id=$1`;
     const result_last_inserted=await connectionPool.query(selectQuery,[last_inserted_id]);
     const user=result_last_inserted.rows[0];
-    console.log(user)
     return user;
 }
 

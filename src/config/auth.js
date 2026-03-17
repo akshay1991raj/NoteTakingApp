@@ -22,7 +22,7 @@ passport.use(new localStrategy({usernameField:'email'},
 ))
 
 passport.serializeUser(async (user,done)=>{
-    done(null,user.id);
+    done(null,user.id,user.user_type);
 })
 
 passport.deserializeUser(async (id,done)=>{
