@@ -4,9 +4,7 @@ const userController=require('../controllers/userController');
 const {validateUser}=require('../validators/userValidators');
 const {validateMultipleInputsInBody,validateMultipleInputsInURLParameters,validateMultipleInputsInQueryString}=require('../validators/inputValidators');
 const {validate}=require('../middleware/validate');
-const {ensureAuthenticated,isAdmin}=require('../middleware/authMiddleware');
-
-// userRouter.get('/users',ensureAuthenticated,validateUser,validateMultipleInputsInBody('first_name','last_name'),userController.getAllUsers);
+const {ensureAuthenticated}=require('../middleware/authMiddleware');
 
 userRouter.get('/',ensureAuthenticated,userController.getUser);
 

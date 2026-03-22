@@ -1,17 +1,16 @@
 const express=require('express');
 const notesbookRouter=express.Router();
+const notebookController=require('../controllers/notebookController');
+const {validateNotebook}=require('../validators/notebookValidator');
+const {validateMultipleInputsInBody,validateMultipleInputsInURLParameters,validateMultipleInputsInQueryString}=require('../validators/inputValidators');
+const {validate}=require('../middleware/validate');
+const {ensureAuthenticated}=require('../middleware/authMiddleware');
+const {authorizeNotebook} = require('../middleware/authorizeMiddleware');
 
-notesbookRouter.get('/',(req,res,next)=>{
-    res.status(200).send('Fetching all notebooks');
-})
+notesbookRouter.get('/',ensureAuthenticated,notebookController.getNotebookByUser);
 
-notesbookRouter.get('/:notebookId',(req,res,next)=>{
-    const notebookId=req.params.notebookId;
-    res.status(200).send(`Fetching note with ID ${notebookId}`);
-})
+notesbookRouter.get('/:notebookId',ensureAuthenticated,validateMultipleInputsInURLParameters('notebookId'),validate,authorizeNotebook,notebookController.getNotebookById);
 
-// notesbookRouter.post('/',(req,res,next)=>{
-//     body=req.params;
-// })
+notesbookRouter.post('/',ensureAuthenticated,validateMultipleInputsInBody('title'),validateNotebook,validate,notebookController.createNotebook);
 
 module.exports=notesbookRouter;
