@@ -28,7 +28,7 @@ const deleteNotebookById = async (req,res,next) =>{
         if (!isDeleted){
             return res.status(500).json({message:"Something went wrong. Notebook not deleted"});
         }
-        return res.status(200).json({Message:"Notebook deleted"});
+        return res.status(200).json({message:"Notebook deleted"});
     }catch(error){
         next(error);
     }
@@ -36,9 +36,8 @@ const deleteNotebookById = async (req,res,next) =>{
 
 const getNotebookById=async (req,res,next)=>{
     try{
-        const userId=req.currentUser.id;
         const notebookId=Number(req.params.notebookId);
-        const notebook=await notebookService.getNotebookById(userId,notebookId);
+        const notebook=await notebookService.getNotebookById(notebookId);
         return res.status(200).json({"notebook":notebook});
     }catch(error){
         next(error);

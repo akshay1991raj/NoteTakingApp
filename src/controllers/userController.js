@@ -2,7 +2,7 @@ const userService=require('../services/userService');
 
 const getUser=async (req,res,next)=>{
     try{
-        const userId=Number(req.session.passport.user);
+        const userId=Number(req.currentUser.id);
         const user=await userService.getUserById(userId);
         return res.status(200).json({user:user});
     }catch(error){

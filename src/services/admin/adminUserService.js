@@ -1,4 +1,4 @@
-const adminModel=require('../../models/admin/adminModel');
+const adminModel=require('../../models/admin/adminUserModel');
 const userModel=require('../../models/userModel');
 
 const getAllUsers= async () =>{
@@ -8,14 +8,14 @@ const getAllUsers= async () =>{
 
 const deleteUserById= async (id) =>{
     const user_to_delete=await userModel.getUserById(id);
-    let isDeleted=0;
+    let isDeleted=false;
     if(user_to_delete.user_type==='admin'){
         throw new Error('Admin user cannot be deleted.');
     }
     const result=await adminModel.deleteUserById(id);
     const deleted_user=await userModel.getUserById(id);
     if(typeof deleted_user==='undefined'){
-        isDeleted=1;
+        isDeleted=true;
     }
     return isDeleted;
 }

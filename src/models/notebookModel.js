@@ -8,7 +8,7 @@ const getAllNotebooks= async ()=>{
 
 const getNotebookById= async (notebookId)=>{
     const query=`select * from notebook where id=$1`;
-    values=[notebookId];
+    const values=[notebookId];
     const result= await connectionPool.query(query,values);
     return result.rows[0];
 }

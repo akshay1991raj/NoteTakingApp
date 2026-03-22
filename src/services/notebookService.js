@@ -26,9 +26,6 @@ const deleteNotebookById = async (notebookId)=>{
     if (!notebook){
         isDeleted=true;
     }
-    if (!notebook){
-        isDeleted=true;
-    }
     return isDeleted;
 }
 

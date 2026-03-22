@@ -34,7 +34,7 @@ app.use('/api',apiRouter);
 const authRouter=require('./routes/authRouter');
 app.use('/auth',authRouter);
 
-const adminRouter=require('./routes/admin/adminRouter');
+const adminRouter=require('./routes/admin/adminUserRouter');
 app.use('/admin',adminRouter);
 
 const errorhandler=require('errorhandler');
