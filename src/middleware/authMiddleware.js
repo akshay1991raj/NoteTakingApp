@@ -6,14 +6,14 @@ const ensureAuthenticated=(req,res,next)=>{
         }
         return next();
     }
-    res.status(401).json('Not authenticated');
+    return res.status(401).json('Not authenticated');
 }
 
 const isAdmin=(req,res,next)=>{
     if(req.currentUser.user_type==="admin"){
         return next();
     }
-    res.status(403).json('Access denied. Admins only.');
+    return res.status(403).json('Access denied. Admins only.');
 }
 
 

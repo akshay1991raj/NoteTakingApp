@@ -11,6 +11,8 @@ notesbookRouter.get('/',ensureAuthenticated,notebookController.getNotebookByUser
 
 notesbookRouter.get('/:notebookId',ensureAuthenticated,validateMultipleInputsInURLParameters('notebookId'),validate,authorizeNotebook,notebookController.getNotebookById);
 
+notesbookRouter.delete('/:notebookId',ensureAuthenticated,validateMultipleInputsInURLParameters('notebookId'),validate,authorizeNotebook,notebookController.deleteNotebookById);
+
 notesbookRouter.post('/',ensureAuthenticated,validateMultipleInputsInBody('title'),validateNotebook,validate,notebookController.createNotebook);
 
 module.exports=notesbookRouter;

@@ -19,4 +19,17 @@ const createNotebook= async (userId,newNotebook)=>{
     return notebook;
 }
 
-module.exports={getNotebookById,createNotebook,getNotebookByUserId};
+const deleteNotebookById = async (notebookId)=>{
+    await notebookModel.deleteNotebookById(notebookId);
+    let isDeleted=false;
+    const notebook=await notebookModel.getNotebookById(notebookId);
+    if (!notebook){
+        isDeleted=true;
+    }
+    if (!notebook){
+        isDeleted=true;
+    }
+    return isDeleted;
+}
+
+module.exports={getNotebookById,createNotebook,getNotebookByUserId,deleteNotebookById};

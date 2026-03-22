@@ -5,7 +5,7 @@ const authorizeNotebook= async (req,res,next)=>{
     try{
         const notebookId=Number(req.params.notebookId);
         if(!notebookId){
-            res.status(404).json({message:"Notebook does not exist"});
+            return res.status(404).json({message:"NotebookId not provided"});
         }
         const userId=req.currentUser.id;
         const notebook=await notebookModel.getNotebookById(notebookId);
@@ -14,7 +14,7 @@ const authorizeNotebook= async (req,res,next)=>{
         }
         return next();
     }catch(error){
-        next(error);
+        return next(error);
     }
 }
 

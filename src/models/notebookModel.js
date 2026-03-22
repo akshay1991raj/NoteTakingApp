@@ -21,6 +21,12 @@ const createNotebook=async (userId,notebookTitle)=>{
     return notebook;
 }
 
+const deleteNotebookById = async (notebookId)=>{
+    let query=`delete from notebook where id=$1`;
+    let values=[notebookId];
+    await connectionPool.query(query,values);
+}
+
 const getNotebookOwnerId=async (userId)=>{
     const query=`select id,title,created_at from notebook where user_id=$1`;
     const values=[userId];
@@ -30,4 +36,4 @@ const getNotebookOwnerId=async (userId)=>{
 }
 
 
-module.exports={getAllNotebooks,getNotebookById,createNotebook,getNotebookOwnerId};
+module.exports={getAllNotebooks,getNotebookById,createNotebook,deleteNotebookById,getNotebookOwnerId};
