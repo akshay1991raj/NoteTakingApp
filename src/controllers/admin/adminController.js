@@ -1,4 +1,4 @@
-const adminService=require('../services/adminService');
+const adminService=require('../../services/admin/adminService');
 
 const getAllUsers=async (req,res,next)=>{
     try{

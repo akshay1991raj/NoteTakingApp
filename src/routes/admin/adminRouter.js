@@ -1,7 +1,7 @@
 const express=require('express');
 const adminRouter=express.Router();
-const adminController = require('../controllers/adminController');
-const {ensureAuthenticated, isAdmin}=require('../middleware/authMiddleware')
+const adminController = require('../../controllers/admin/adminController');
+const {ensureAuthenticated, isAdmin}=require('../../middleware/authMiddleware')
 
 adminRouter.get('/users', ensureAuthenticated, isAdmin, adminController.getAllUsers);
 

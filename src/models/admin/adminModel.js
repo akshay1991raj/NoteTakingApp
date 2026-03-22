@@ -1,4 +1,4 @@
-const connectionPool=require('../config/db.js');
+const connectionPool=require('../../config/db.js');
 
 const getAllUsers= async ()=>{
     const query=`select id,email,first_name,last_name,user_type from users`;

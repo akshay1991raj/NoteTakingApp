@@ -1,5 +1,5 @@
-const adminModel=require('../models/adminModel');
-const userModel=require('../models/userModel');
+const adminModel=require('../../models/admin/adminModel');
+const userModel=require('../../models/userModel');
 
 const getAllUsers= async () =>{
     const users=await adminModel.getAllUsers();
