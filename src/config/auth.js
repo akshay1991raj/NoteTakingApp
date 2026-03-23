@@ -6,16 +6,15 @@ const userService=require('../services/userService')
 passport.use(new localStrategy({usernameField:'email'},
     async function (email,password,done){
         try{
-            const user=await authService.verifyUser(email);
+            const user=await authService.verifyPassword(email,password);
             if (!user){
-                return done(null,false,{message: 'User does not exist'});
-            }
-            const passwordVerified=await authService.verifyPassword(email,password)
-            if (!passwordVerified){
                 return done(null,false,{message: 'Invalid Password'});
             }
             return done(null,user);
         }catch(err){
+            if (err.message === 'User does not exist') {
+                return done(null, false, { message: 'User does not exist' });
+            }
             return done(err);
         }
     }

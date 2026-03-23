@@ -23,16 +23,17 @@ const verifyUser=async (email)=>{
 }
 
 const verifyPassword=async (email,password)=>{
-    const user=await verifyUser(email);
+    const user=await userModel.getUserWithPasswordByEmail(email);
     if (!user){
-        return null;
+        throw new Error("User does not exist");
     }
-    const userPassword=await userModel.getPasswordByEmail(email);
-    const validPassword=await bcrypt.compare(password,userPassword.password);
+    const validPassword=await bcrypt.compare(password,user.password);
     if (!validPassword){
         return null;
     }
     return user;   
 }
+
+
 
 module.exports={verifyUser,verifyPassword,registerUser};

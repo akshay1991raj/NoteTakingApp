@@ -9,6 +9,9 @@ const authorizeNotebook= async (req,res,next)=>{
         }
         const userId=req.currentUser.id;
         const notebook=await notebookModel.getNotebookById(notebookId);
+        if (!notebook){
+            return res.status(404).json({message:"Notebook does not exist"});
+        }
         if (notebook.user_id !== userId){
             return res.status(403).json({message:"Access Denied. User does not own the notebook."})
         }

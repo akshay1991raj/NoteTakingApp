@@ -9,7 +9,7 @@ const signUp = async(req,res,next)=>{
             error.status=500;
             throw error;
         }
-        res.status(200).json({message: "New user created"});
+        return res.status(201).json({message: "New user created"});
     }catch(error){
         next(error);
     }

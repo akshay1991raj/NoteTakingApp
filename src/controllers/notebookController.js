@@ -15,7 +15,7 @@ const createNotebook=async (req,res,next)=>{
         const userId=req.currentUser.id;
         const newNotebook=req.body;
         const notebook=await notebookService.createNotebook(userId,newNotebook);
-        return res.status(200).json({"notebook":notebook});
+        return res.status(201).json({"notebook":notebook});
     }catch(error){
         next(error);
     }

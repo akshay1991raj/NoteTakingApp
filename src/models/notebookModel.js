@@ -22,7 +22,7 @@ const createNotebook=async (userId,notebookTitle)=>{
 }
 
 const deleteNotebookById = async (notebookId)=>{
-    let query=`delete from notebook where id=$1`;
+    const query=`delete from notebook where id=$1`;
     let values=[notebookId];
     await connectionPool.query(query,values);
 }

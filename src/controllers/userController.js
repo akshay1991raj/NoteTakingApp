@@ -11,9 +11,9 @@ const getUser=async (req,res,next)=>{
 
 }
 
-const getUserById=async (req,res,next)=>{
-    const userId=Number(req.params.userId);
+const getUserById=async (req,res,next)=>{ 
     try{
+        const userId=Number(req.params.userId);
         const user=await userService.getUserById(userId);
         return res.status(200).json({user:user});
     }catch(error){
