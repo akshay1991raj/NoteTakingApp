@@ -7,7 +7,8 @@ services:
     ports:
       - "4001:4001"
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       NODE_ENV: production
       DB_HOST: db
@@ -33,7 +34,8 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - .env
+      - path: .env
+        required: false
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
