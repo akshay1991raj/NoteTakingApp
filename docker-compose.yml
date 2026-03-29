@@ -3,6 +3,7 @@ version: "3.9"
 services:
   app:
     build: .
+    image: notetakingapp:latest
     container_name: notetakingapp_container
     ports:
       - "4001:4001"
