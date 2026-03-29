@@ -1,7 +1,7 @@
 const { app } = require('./src/app.js');
 const pool = require('./src/config/db.js');
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 80;
 
 pool.query("SELECT NOW()")
   .then(() => {

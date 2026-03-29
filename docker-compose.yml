@@ -6,7 +6,7 @@ services:
     image: notetakingapp:latest
     container_name: notetakingapp_container
     ports:
-      - "4001:4001"
+      - "80:80"
     env_file:
       - path: .env
         required: false
