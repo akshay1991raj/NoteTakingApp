@@ -23,7 +23,9 @@ jobs:
 
       # 3. Save image as tar (artifact-based deployment)
       - name: Save Docker image
-        run: docker save notetakingapp:latest -o notetakingapp.tar
+        run: |
+          docker save notetakingapp:latest -o notetakingapp.tar
+          chmod 644 notetakingapp.tar
 
       # 4. Copy files to EC2 (NO git clone)
       - name: Copy files to EC2
