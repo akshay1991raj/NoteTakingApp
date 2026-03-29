@@ -20,6 +20,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - .:/NoteTakingApp
+      - /NoteTakingApp/node_modules
+    command: npm run dev
     restart: unless-stopped
 
   db:
