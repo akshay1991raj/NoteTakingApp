@@ -5,11 +5,16 @@ services:
     build: .
     container_name: notetakingapp_container
     ports:
-      - "127.0.0.1:4001:4001"
+      - "4001:4001"
     env_file:
       - .env
     environment:
-      - DB_HOST=db 
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME} 
     depends_on:
       db:
         condition: service_healthy
@@ -26,7 +31,7 @@ services:
       POSTGRES_DB: ${DB_NAME}
     container_name: postgres_db_container
     ports:
-      - "127.0.0.1:5432:5432"
+      - "5432:5432"
     env_file:
       - .env
     volumes:

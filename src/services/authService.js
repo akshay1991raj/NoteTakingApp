@@ -8,7 +8,7 @@ const registerUser= async (userData) =>{
     if (existingUser){
         throw new Error('User exists');
     }
-    const saltRounds = Number(process.env.SALT_ROUNDS);
+    const saltRounds = 12;
     const passwordHash = await bcrypt.hash(password, saltRounds);
     const user=await userModel.createUser(first_name,last_name,email,passwordHash);
     return user;

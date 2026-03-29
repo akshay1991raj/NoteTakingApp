@@ -1,0 +1,65 @@
+name: Deployment
+
+run-name: Build a docker image and deploy to EC2 
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Build Docker image
+      - name: Build Docker image
+        run: docker build -t notetakingapp:latest .
+
+      # 3. Save image as tar (artifact-based deployment)
+      - name: Save Docker image
+        run: docker save notetakingapp:latest -o notetakingapp.tar
+
+      # 4. Copy files to EC2 (NO git clone)
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "notetakingapp.tar,docker-compose.yml"
+          target: "~/NoteTakingApp"
+
+      # 5. Deploy via SSH
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+
+            cd ~/NoteTakingApp
+
+            # Load Docker image
+            docker load -i notetakingapp.tar
+
+            # Stop existing containers safely
+            docker compose down || true
+
+            # Inject secrets into shell (NOT written to disk)
+            export DB_USER="${{ secrets.DB_USER }}"
+            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+            export DB_NAME="${{ secrets.DB_NAME }}"
+
+            # Start services
+            docker compose up -d --remove-orphans
+
+            # Cleanup tar
+            rm -f notetakingapp.tar
